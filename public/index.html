@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free Talk — Duniya bhar se dost</title>
+<style>
+:root{--bg:#070b24;--bg2:#160b38;--card:rgba(255,255,255,.07);--card2:rgba(255,255,255,.12);--txt:#eef0ff;--mut:#a7abdb;--acc:#7c3aed;--acc2:#2563eb;--gold:#f5c451;--ok:#34d399;--bad:#f87171;--rad:18px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 55%,#0b2a6b 100%);background-attachment:fixed;color:var(--txt);min-height:100vh;padding-bottom:86px}
+a{color:#b79cff}
+button{font:inherit;cursor:pointer;border:none;border-radius:999px;padding:10px 18px;background:linear-gradient(90deg,var(--acc),var(--acc2));color:#fff;font-weight:600;transition:.15s}
+button:active{transform:scale(.97)}
+button.ghost{background:var(--card);border:1px solid rgba(255,255,255,.15)}
+button.small{padding:6px 12px;font-size:.85rem}
+button.danger{background:linear-gradient(90deg,#dc2626,#991b1b)}
+button:disabled{opacity:.45;cursor:default}
+input,select,textarea{font:inherit;width:100%;padding:11px 13px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.28);color:var(--txt);margin:5px 0}
+input::placeholder,textarea::placeholder{color:#8a8fc4}
+select option{color:#111}
+label{font-size:.82rem;color:var(--mut);display:block;margin-top:8px}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.09);border-radius:var(--rad);padding:14px;margin:10px 0;backdrop-filter:blur(6px)}
+.row{display:flex;align-items:center;gap:10px}
+.grow{flex:1}
+.mut{color:var(--mut);font-size:.88rem}
+.small{font-size:.8rem}
+.center{text-align:center}
+.hidden{display:none!important}
+.avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.05rem;overflow:hidden;flex:none;color:#fff}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.avatar.big{width:84px;height:84px;font-size:2rem}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:var(--card2);font-size:.75rem;font-weight:700}
+.chip.gold{background:linear-gradient(90deg,#b8860b,#f5c451);color:#231a00}
+.chip.free{background:rgba(52,211,153,.18);color:var(--ok);border:1px solid rgba(52,211,153,.4)}
+.dot{width:9px;height:9px;border-radius:50%;background:#5b5f8f;flex:none}
+.dot.on{background:var(--ok);box-shadow:0 0 8px var(--ok)}
+header.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(7,11,36,.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.07)}
+.logo{font-size:1.3rem;font-weight:800;letter-spacing:.3px}
+.logo span{background:linear-gradient(90deg,#c4b5fd,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent}
+nav.bottom{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;background:rgba(9,10,34,.95);backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.09);padding:6px 2px calc(6px + env(safe-area-inset-bottom))}
+nav.bottom button{flex:1;background:none;border-radius:12px;padding:7px 0 5px;font-size:.68rem;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:2px;font-weight:600}
+nav.bottom button .ic{font-size:1.25rem}
+nav.bottom button.act{color:#fff;background:rgba(124,58,237,.25)}
+main{max-width:680px;margin:0 auto;padding:10px 14px}
+.hero{background:linear-gradient(120deg,rgba(124,58,237,.5),rgba(37,99,235,.45));border-radius:22px;padding:18px;margin:10px 0;border:1px solid rgba(255,255,255,.14)}
+.hero h2{font-size:1.35rem;line-height:1.25}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.person{background:var(--card);border:1px solid rgba(255,255,255,.09);border-radius:var(--rad);padding:12px;text-align:center}
+.roomcard{border-radius:var(--rad);padding:14px;color:#fff;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.14);min-height:110px;display:flex;flex-direction:column;justify-content:flex-end;background-size:cover;background-position:center}
+.seats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+.seat{text-align:center}
+.seat .ring{width:64px;height:64px;margin:0 auto;border-radius:50%;background:var(--card);border:2px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:1.5rem;overflow:hidden}
+.seat .ring img{width:100%;height:100%;object-fit:cover}
+.seat.speaking .ring{border-color:var(--ok);box-shadow:0 0 0 4px rgba(52,211,153,.35);animation:pulse 1s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(52,211,153,.12)}}
+.msg{max-width:78%;padding:9px 12px;border-radius:16px;margin:5px 0;background:var(--card2);width:fit-content}
+.msg.me{margin-left:auto;background:linear-gradient(120deg,var(--acc),var(--acc2))}
+.msg .meta{font-size:.68rem;color:rgba(255,255,255,.65);margin-top:3px;text-align:right}
+.msg img{max-width:200px;border-radius:10px;display:block}
+.bar{height:9px;border-radius:99px;background:rgba(255,255,255,.13);overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:99px}
+.bar.gold>i{background:linear-gradient(90deg,#b8860b,#f5c451)}
+.meter{height:10px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;flex:1}
+.meter>i{display:block;height:100%;width:0%;background:var(--ok);transition:width .12s}
+.overlay{position:fixed;inset:0;z-index:50;background:linear-gradient(165deg,var(--bg),var(--bg2));overflow-y:auto;padding:14px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:100px;z-index:99;background:#141038;border:1px solid rgba(255,255,255,.25);color:#fff;padding:10px 18px;border-radius:999px;font-size:.9rem;box-shadow:0 8px 30px rgba(0,0,0,.5);max-width:92vw;text-align:center}
+.tabs{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}
+.tabs button{background:var(--card);color:var(--mut)}
+.tabs button.act{background:linear-gradient(90deg,var(--acc),var(--acc2));color:#fff}
+.giftgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.gift{background:var(--card);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:12px 6px;text-align:center}
+.gift .em{font-size:1.9rem}
+.badge{opacity:.45;filter:grayscale(.7);text-align:center;padding:10px 4px}
+.badge.unlocked{opacity:1;filter:none}
+video.cam{width:100%;border-radius:14px;background:#000;max-height:300px;object-fit:cover}
+.announce{background:rgba(245,196,81,.15);border:1px solid rgba(245,196,81,.45);border-radius:14px;padding:10px 13px;margin:8px 0;font-size:.92rem}
+.kv{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,.08);font-size:.92rem}
+</style>
+</head>
+<body>
+
+<!-- ============ AUTH ============ -->
+<div id="authView">
+  <main style="padding-top:34px">
+    <div class="center">
+      <div style="font-size:3rem">🎙️</div>
+      <div class="logo" style="font-size:2rem">Free <span>Talk</span></div>
+      <p class="mut">Duniya bhar se dost — free voice rooms, chat aur video call</p>
+      <p style="margin-top:6px"><span class="chip free">FREE • No coins needed • Unlimited</span></p>
+    </div>
+    <div class="tabs" style="justify-content:center">
+      <button id="tabLogin" class="act" onclick="authTab('login')">Log in</button>
+      <button id="tabRegister" onclick="authTab('register')">Register</button>
+      <button id="tabForgot" onclick="authTab('forgot')">Forgot password</button>
+    </div>
+
+    <div class="card" id="loginBox">
+      <label>SIM number</label><input id="liSim" placeholder="+92 3xx xxxxxxx" autocomplete="username">
+      <label>Password</label><input id="liPw" type="password" placeholder="Password" autocomplete="current-password">
+      <button style="width:100%;margin-top:10px" onclick="doLogin()">Log in</button>
+      <p class="mut small center" style="margin-top:8px">Registration is by SIM number only — one SIM, one account.</p>
+    </div>
+
+    <div class="card hidden" id="registerBox">
+      <label>SIM number</label><input id="rgSim" placeholder="+92 3xx xxxxxxx">
+      <button class="ghost" style="width:100%" onclick="requestOtp('rg')">Send OTP code</button>
+      <div id="rgOtpNote"></div>
+      <label>6-digit OTP code</label><input id="rgOtp" inputmode="numeric" maxlength="6" placeholder="______">
+      <label>Password (min 6)</label><input id="rgPw" type="password" placeholder="Password">
+      <label>Display name</label><input id="rgName" placeholder="Your name">
+      <label>Username (unique)</label><input id="rgUser" placeholder="e.g. ahmad_ft">
+      <label>Date of birth (age shows on profile — full date never shown)</label><input id="rgDob" type="date">
+      <label>Country</label>
+      <select id="rgCountry"><option value="">Select country…</option></select>
+      <label>Invite code (optional — dost ki Free Talk ID)</label><input id="rgInvite" placeholder="FT-XXXXXX">
+      <button style="width:100%;margin-top:10px" onclick="doRegister()">Create my account</button>
+      <p class="mut small" style="margin-top:8px">The first account registered becomes the app Owner / Super Admin at TOP level. Verification later is by live camera selfie only.</p>
+    </div>
+
+    <div class="card hidden" id="forgotBox">
+      <label>SIM number</label><input id="fgSim" placeholder="+92 3xx xxxxxxx">
+      <button class="ghost" style="width:100%" onclick="requestOtp('fg')">Send OTP code</button>
+      <div id="fgOtpNote"></div>
+      <label>6-digit OTP code</label><input id="fgOtp" inputmode="numeric" maxlength="6" placeholder="______">
+      <label>New password</label><input id="fgPw" type="password" placeholder="New password">
+      <button style="width:100%;margin-top:10px" onclick="doReset()">Reset password</button>
+    </div>
+  </main>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="appView" class="hidden">
+  <header class="top">
+    <div class="logo">🎙️ Free <span>Talk</span></div>
+    <div class="grow"></div>
+    <span class="chip" id="walletChip">🪙 0</span>
+    <div class="avatar" id="meAvatar" style="width:38px;height:38px;font-size:.95rem" onclick="go('profile')"></div>
+  </header>
+  <main>
+    <div id="announceBox"></div>
+    <section id="view-home"></section>
+    <section id="view-rooms" class="hidden"></section>
+    <section id="view-friends" class="hidden"></section>
+    <section id="view-messages" class="hidden"></section>
+    <section id="view-gifts" class="hidden"></section>
+    <section id="view-profile" class="hidden"></section>
+  </main>
+  <nav class="bottom">
+    <button data-nav="home" class="act" onclick="go('home')"><span class="ic">🏠</span>Home</button>
+    <button data-nav="rooms" onclick="go('rooms')"><span class="ic">🎙️</span>Rooms</button>
+    <button data-nav="friends" onclick="go('friends')"><span class="ic">👥</span>Friends</button>
+    <button data-nav="messages" onclick="go('messages')"><span class="ic">💬</span>Messages</button>
+    <button data-nav="gifts" onclick="go('gifts')"><span class="ic">🎁</span>Gifts</button>
+    <button data-nav="profile" onclick="go('profile')"><span class="ic">👤</span>Profile</button>
+  </nav>
+</div>
+
+<!-- ============ ROOM OVERLAY ============ -->
+<div id="roomView" class="overlay hidden"></div>
+<!-- ============ CHAT OVERLAY ============ -->
+<div id="chatView" class="overlay hidden"></div>
+<!-- ============ CALL OVERLAY ============ -->
+<div id="callView" class="overlay hidden" style="z-index:60"></div>
+
+<div id="toast" class="hidden"></div>
+<script src="/app.js"></script>
+</body>
+</html>
