@@ -1,0 +1,1 @@
+{"dependencies":{"pg":"^8.13.1"},"description":"Free Talk — social voice chat app (deployable copy: front end + API in one Node service)","engines":{"node":">=18"},"main":"server.js","name":"free-talk","private":true,"scripts":{"smoke":"node scripts/smoke.mjs","start":"node server.js"},"version":"1.0.0"}
